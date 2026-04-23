@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Libre Baskerville", serif;
+  
+  --color-brand-paper: #F9F8F4;
+  --color-brand-ink: #333322;
+  --color-brand-accent: #A84A32;
+  --color-brand-muted: #8A8576;
+  --color-brand-line: #D1CEC2;
+}
+
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+  body {
+    @apply font-serif bg-brand-paper text-brand-ink;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+
+  .font-sans-micro {
+    @apply font-sans uppercase tracking-[0.3em] text-[10px];
+  }
+}
