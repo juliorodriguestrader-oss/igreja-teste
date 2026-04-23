@@ -19,7 +19,55 @@ import {
   Mail,
   Quote
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import L from 'leaflet';
+
+// Fix for Leaflet default icon issues (though we use custom marker)
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+});
+
+// Custom Marker component using Lucide icon
+const CustomMarkerIcon = L.divIcon({
+  html: `<div class="bg-brand-accent p-2 rounded-full border-2 border-white shadow-lg transform -translate-x-1/2 -translate-y-1/2">
+           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+         </div>`,
+  className: '',
+  iconSize: [40, 40],
+  iconAnchor: [20, 20],
+});
+
+const ChurchMap = () => {
+  const position: [number, number] = [-6.4947, -43.5186];
+
+  return (
+    <div className="h-full w-full grayscale-[100%] contrast-[1.1] hover:grayscale-0 transition-all duration-700">
+      <MapContainer 
+        center={position} 
+        zoom={15} 
+        scrollWheelZoom={false}
+        className="h-full w-full"
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={position} icon={CustomMarkerIcon}>
+          <Popup className="font-serif">
+            <div className="text-brand-ink">
+              <p className="font-bold uppercase text-[10px] tracking-widest mb-1">Assembleia de Deus Missões</p>
+              <p className="text-xs">S. J. dos Patos - MA</p>
+            </div>
+          </Popup>
+        </Marker>
+      </MapContainer>
+    </div>
+  );
+};
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -351,15 +399,8 @@ const App = () => {
             </div>
           </div>
           <div className="md:col-span-8">
-            <div className="h-[500px] w-full border border-brand-line p-4 bg-white relative group">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31766.126485888825!2d-43.5186!3d-6.495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7770000000000001%3A0x7770000000000001!2zU8OjbyBKb8OjbyBkb3MgUGF0b3MsIE1BIC0gNjU2NjUtMDAw!5e0!3m2!1spt-BR!2sbr!4v1713880000000!5m2!1spt-BR!2sbr" 
-                className="w-full h-full grayscale-[100%] contrast-[1.1] hover:grayscale-0 transition-all duration-700" 
-                style={{ border: 0 }} 
-                allowFullScreen={true} 
-                loading="lazy"
-                title="Localização da Igreja Assembleia de Deus Missões em São João dos Patos"
-              />
+            <div className="h-[500px] w-full border border-brand-line p-4 bg-white relative group z-0">
+              <ChurchMap />
               {/* Artistic border overlay */}
               <div className="absolute -bottom-8 -right-8 w-32 h-32 border border-brand-line border-t-0 border-l-0 hidden md:block"></div>
             </div>
