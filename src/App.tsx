@@ -16,7 +16,8 @@ import {
   Menu, 
   X,
   Phone,
-  Mail
+  Mail,
+  Quote
 } from "lucide-react";
 import { useState } from "react";
 
@@ -38,9 +39,10 @@ const Navbar = () => {
           <a href="#sobre" className="hover:text-brand-accent transition-colors">Sobre</a>
           <a href="#cultos" className="hover:text-brand-accent transition-colors">Cultos</a>
           <a href="#comunidade" className="hover:text-brand-accent transition-colors">Comunidade</a>
-          <button className="font-bold border-b border-brand-ink pb-1 hover:text-brand-accent hover:border-brand-accent transition-all">
+          <a href="#depoimentos" className="hover:text-brand-accent transition-colors">Depoimentos</a>
+          <a href="#visite" className="font-bold border-b border-brand-ink pb-1 hover:text-brand-accent hover:border-brand-accent transition-all">
             Visite-nos
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -60,7 +62,8 @@ const Navbar = () => {
           <a href="#sobre" className="font-sans text-xs uppercase tracking-[0.2em] text-brand-ink" onClick={() => setIsOpen(false)}>Sobre</a>
           <a href="#cultos" className="font-sans text-xs uppercase tracking-[0.2em] text-brand-ink" onClick={() => setIsOpen(false)}>Cultos</a>
           <a href="#comunidade" className="font-sans text-xs uppercase tracking-[0.2em] text-brand-ink" onClick={() => setIsOpen(false)}>Comunidade</a>
-          <button className="font-bold border-b border-brand-ink pb-1 mx-auto" onClick={() => setIsOpen(false)}>Visite-nos</button>
+          <a href="#depoimentos" className="font-sans text-xs uppercase tracking-[0.2em] text-brand-ink" onClick={() => setIsOpen(false)}>Depoimentos</a>
+          <a href="#visite" className="font-bold border-b border-brand-ink pb-1 mx-auto" onClick={() => setIsOpen(false)}>Visite-nos</a>
         </motion.div>
       )}
     </nav>
@@ -111,8 +114,8 @@ const Hero = () => {
             <div>
               <h3 className="text-xs font-sans uppercase tracking-widest text-brand-muted mb-4">Nossa Localização</h3>
               <p className="text-xl leading-relaxed font-serif italic text-brand-ink">
-                Av. da Esperança, 123<br/>
-                Centro, São Paulo — SP
+                São João dos Patos<br/>
+                Maranhão — MA
               </p>
             </div>
             <div>
@@ -212,14 +215,22 @@ const App = () => {
         </div>
       </section>
 
-      {/* Features/Values */}
-      <section className="py-32 px-16 max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-16">
+      {/* Comunidade Section */}
+      <section id="comunidade" className="py-32 px-16 max-w-7xl mx-auto border-b border-brand-line">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-10">
+          <div className="max-w-2xl">
+            <span className="text-brand-muted font-sans text-[10px] uppercase tracking-[0.4em] mb-6 block">Nossa Vida Juntos</span>
+            <h2 className="text-5xl font-medium tracking-tight text-brand-ink">Vida em Comunidade</h2>
+          </div>
+          <p className="text-brand-muted font-sans text-[10px] uppercase tracking-[0.2em] mb-2 border-b border-brand-line pb-1">Conectando pessoas a propósitos</p>
+        </div>
+
+        <div className="grid md:grid-cols-4 gap-16 mb-32">
           {[
-            { icon: Users, title: "Pequenos Grupos", desc: "Comunidade próxima em reuniões nos lares." },
-            { icon: Heart, title: "Ação Social", desc: "Impactando nossa cidade através do serviço." },
-            { icon: MapPin, title: "Kids & Teens", desc: "Um lugar seguro para seus filhos crescerem." },
-            { icon: Youtube, title: "Online", desc: "Acompanhe nossas transmissões ao vivo." },
+            { icon: Users, title: "Pequenos Grupos", desc: "Comunidade próxima em reuniões nos lares para estudo e amizade." },
+            { icon: Heart, title: "Ação Social", desc: "Impactando nossa cidade através de projetos de apoio e compaixão." },
+            { icon: MapPin, title: "Kids & Teens", desc: "Um lugar seguro e divertido para seus filhos crescerem na fé." },
+            { icon: Youtube, title: "Ministérios Online", desc: "Acompanhe nossas transmissões ao vivo de onde estiver." },
           ].map((item, i) => (
             <motion.div 
               key={i}
@@ -234,6 +245,58 @@ const App = () => {
               </div>
               <h4 className="font-sans text-[10px] uppercase tracking-[0.3em] font-bold mb-4 text-brand-ink">{item.title}</h4>
               <p className="text-brand-muted text-sm leading-relaxed font-serif opacity-80">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Depoimentos Section */}
+      <section id="depoimentos" className="py-32 px-16 max-w-7xl mx-auto border-b border-brand-line">
+        <div className="text-center mb-24">
+          <span className="text-brand-muted font-sans text-[10px] uppercase tracking-[0.4em] mb-6 block">Testemunhos Reais</span>
+          <h2 className="text-5xl md:text-6xl font-medium tracking-tight text-brand-ink leading-tight">Vidas que foram <br/> <span className="italic font-light text-brand-accent font-serif">transformadas</span>.</h2>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-12">
+          {[
+            {
+              text: "A Igreja Esperança se tornou meu lar. Aqui encontrei acolhimento e uma fé que faz sentido no meu dia a dia.",
+              author: "Maria Silva",
+              time: "Membro há 5 anos",
+              seed: "person1"
+            },
+            {
+              text: "Os pequenos grupos são o coração dessa igreja. É onde realmente vivemos a comunhão e o cuidado mútuo.",
+              author: "Lucas Oliveira",
+              time: "Líder de Célula",
+              seed: "person2"
+            },
+            {
+              text: "Meus filhos amam vir para a igreja. O trabalho com as crianças é feito com muito amor e excelência.",
+              author: "Ricardo Santos",
+              time: "Fiel Frequentador",
+              seed: "person3"
+            }
+          ].map((d, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="border border-brand-line p-12 bg-white hover:bg-brand-paper transition-all group relative"
+            >
+              <Quote className="text-brand-accent w-8 h-8 mb-8 opacity-20 group-hover:opacity-100 transition-opacity" />
+              <p className="font-serif text-xl italic leading-relaxed mb-12 text-brand-ink">"{d.text}"</p>
+              <div className="flex items-center gap-4 border-t border-brand-line pt-8">
+                <div className="w-10 h-10 rounded-full overflow-hidden grayscale border border-brand-line">
+                  <img src={`https://picsum.photos/seed/${d.seed}/100/100`} alt={d.author} referrerPolicy="no-referrer" />
+                </div>
+                <div>
+                  <p className="font-sans text-[10px] font-bold uppercase tracking-widest text-brand-ink">{d.author}</p>
+                  <p className="font-sans text-[9px] uppercase tracking-widest text-brand-muted">{d.time}</p>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -261,6 +324,49 @@ const App = () => {
         <div className="absolute top-1/2 left-0 w-full h-[1px] bg-white/5 hidden lg:block"></div>
       </section>
 
+      {/* Visit Us Section with Interactive Map */}
+      <section id="visite" className="py-32 px-16 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-12 gap-16 items-center">
+          <div className="md:col-span-4">
+            <span className="text-brand-muted font-sans text-[10px] uppercase tracking-[0.4em] mb-6 block">Venha nos conhecer</span>
+            <h2 className="text-5xl font-medium tracking-tight text-brand-ink mb-10 leading-tight">Sinta-se em <span className="italic font-light text-brand-accent">casa</span>.</h2>
+            <div className="space-y-8 border-l border-brand-line pl-8 font-sans text-[10px] uppercase tracking-widest text-brand-muted">
+              <div>
+                <p className="font-bold text-brand-ink mb-2">Endereço</p>
+                <p>Igreja Evangélica Assembleia de Deus Missões<br/>São João dos Patos — MA</p>
+              </div>
+              <div>
+                <p className="font-bold text-brand-ink mb-2">Horários Principais</p>
+                <p>Domingo: 10h & 19h<br/>Quarta: 20h</p>
+              </div>
+              <a 
+                href="https://share.google/moDFj4zaVoJ6AXuMN" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 text-brand-accent font-bold group w-fit"
+              >
+                Ver no Google Maps
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+              </a>
+            </div>
+          </div>
+          <div className="md:col-span-8">
+            <div className="h-[500px] w-full border border-brand-line p-4 bg-white relative group">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31766.126485888825!2d-43.5186!3d-6.495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7770000000000001%3A0x7770000000000001!2zU8OjbyBKb8OjbyBkb3MgUGF0b3MsIE1BIC0gNjU2NjUtMDAw!5e0!3m2!1spt-BR!2sbr!4v1713880000000!5m2!1spt-BR!2sbr" 
+                className="w-full h-full grayscale-[100%] contrast-[1.1] hover:grayscale-0 transition-all duration-700" 
+                style={{ border: 0 }} 
+                allowFullScreen={true} 
+                loading="lazy"
+                title="Localização da Igreja Assembleia de Deus Missões em São João dos Patos"
+              />
+              {/* Artistic border overlay */}
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 border border-brand-line border-t-0 border-l-0 hidden md:block"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-brand-paper pt-32 pb-12 px-16 border-t border-brand-line">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16 mb-32">
@@ -284,7 +390,8 @@ const App = () => {
               <li><a href="#" className="hover:text-brand-accent transition-colors">Início</a></li>
               <li><a href="#sobre" className="hover:text-brand-accent transition-colors">Quem Somos</a></li>
               <li><a href="#cultos" className="hover:text-brand-accent transition-colors">Agenda de Cultos</a></li>
-              <li><a href="#" className="hover:text-brand-accent transition-colors">Ministérios</a></li>
+              <li><a href="#comunidade" className="hover:text-brand-accent transition-colors">Comunidade</a></li>
+              <li><a href="#depoimentos" className="hover:text-brand-accent transition-colors">Depoimentos</a></li>
             </ul>
           </div>
 
@@ -301,7 +408,7 @@ const App = () => {
               </li>
               <li className="flex items-start gap-4">
                 <MapPin className="w-3 h-3 text-brand-accent mt-0.5 shrink-0" />
-                <span className="leading-relaxed">Av. da Esperança, 123 - Centro, São Paulo - SP</span>
+                <span className="leading-relaxed">São João dos Patos - Maranhão</span>
               </li>
             </ul>
           </div>
